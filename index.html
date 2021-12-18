@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script> <!--font-awesome-->
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Stock Tracker</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Stock Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li> -->
+                <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+            </ul>
+            <a href="#" class="navbar-brand text-center">
+                <img src="/img/Stock_Tracker_Logo.svg" alt="Stock Trader" width="150" height="70">
+            </a>
+            <form action="" class="d-flex">
+                <input type="search" placeholder = "$TICKER" class="form-control me-2" aria-label="$TICKER" id="searchBox">
+                <button class="btn btn-outline-success txt-dark" type="button" id="searchTicker">Search</button>
+            </form>
+        </div>
+    </div>
+  </nav>
+    <main class="flex-shrink-0">
+        <div class="container mt-5">
+            <div class="row row-cols-1">
+                <!--This column is meant to hold information related to the stock that comes from api ALPHAVANTAGE-->
+                <div class="col-12 mt-5">
+                    <div class="container  pb-3"> <!--border border-2 border-dark-->
+                        <h3 class=" border-2 border-bottom border-primary pb-1 text-center" id="stockHistName">Stock History</h3>
+                        <button class="bg-dark btn-md text-light mt-3" id="all_time">All time</button>
+                        <button class="bg-dark btn-md text-light mt-3" id="weekly_time">Weekly</button>
+                        <button class="bg-dark btn-md text-light mt-3" id="daily_time">Daily</button>
+                        <button class="bg-dark btn-md text-light mt-3" id="monthly_time">Monthly</button>
+                        <button class="bg-dark btn-md text-light mt-3" id="yearly_time">Yearly</button>
+
+
+                        <div id='chartHolder'>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!--This column is meant to hold information that comes from NEWS API which provides articles related to the tickers we are looking for.-->
+                <div class="col-12 mt-5">
+                    <div class="container pb-3"> <!-- border border-2 border-dark-->
+                        <h3 class=" border-2 border-bottom border-primary pb-1 text-center" id="stockNewsName">Stock News</h3>
+                        <button class="bg-dark btn-md text-light mt-3" id="see_articles">See Articles</button>
+                        <div class="container-fluid gy-2 mb-2 " id="newsHolder"> <!--border border-2 border-dark--> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <div class="container  pb-3"> <!--border border-2 border-dark-->
+                        <h3 class=" border-2 border-bottom border-primary pb-1 text-center" id="stockSemiAnnualBalanceName">Stock Semi Annual Balance Sheet</h3>
+
+                        <button class="bg-dark btn-md text-light mt-3" id="see_semi_annual_balance_sheet">Semi Annual Balance Sheet</button>
+                        <div class="container-fluid gy-2 mt-3" id="seeSemiAnnualBalanceSheet"> <!-- border border-2 border-dark-->
+                            <div class="holder table-responsive pb-4"> <!--Container to hold the table and make it responsive. Since the table is long it needs to be able to scroll all the way to the left and to the right-->
+                                <table class="table table-striped table-border table-light text-center"> 
+                                    <tbody id="results">
+                                        <thead>
+                                            <tr class="text-primary"> <!--The header for the table that names all of the different data.-->
+                                                <th scope='col'><small>Semi Annual Balance Sheet</small></th>
+                                                <th scope='col'><small>Cash & Cash Equivalents At Carraying Value</small></th>
+                                                <th scope='col'><small>Cash & Short Term Investments</small></th>
+                                                <th scope='col'><small>Common Stock</small></th>
+                                                <th scope='col'><small>Common Stock Shares Outstanding</small></th>
+                                                <th scope='col'><small>Current Accounts Payable</small></th>
+                                                <th scope='col'><small>Current Debt</small></th>
+                                                <th scope='col'><small>Current Long Term Debt</small></th>
+                                                <th scope='col'><small>Intangible Assets</small></th>
+                                                <th scope='col'><small>Intangible Assets Excluding Goodwill</small></th>
+                                                <th scope='col'><small>Inventory</small></th>
+                                                <th scope='col'><small>Investments</small></th>
+                                                <th scope='col'><small>Long Term Debt</small></th>
+                                                <th scope='col'><small>Long Term Debt NonConcurrent</small></th>
+                                                <th scope='col'><small>Long Term Investments</small></th>
+                                                <th scope='col'><small>Other Current Assets</small></th>
+                                                <th scope='col'><small>Other NonCurrent Liabilities</small></th>
+                                                <th scope='col'><small>Short Long Term Debt Total</small></th>
+                                                <th scope='col'><small>Short Term Investments</small></th>
+                                                <th scope='col'><small>Total Assets</small></th>
+                                                <th scope='col'><small>Total Current Assets</small></th>
+                                                <th scope='col'><small>Total Current Liabilites</small></th>
+                                                <th scope='col'><small>Total NonCurrent Liabilities</small></th>
+                                                <th scope='col'><small>Total Shareholder Equity</small></th>
+
+                                            </tr>
+                                        </thead>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <div class="container  pb-3"> <!--border border-2 border-dark-->
+                        <h3 class=" border-2 border-bottom border-primary pb-1 text-center" id="stockEpsName">Stock EPS</h3>
+
+                        <button class="bg-dark btn-md text-light mt-3" id="see_eps_quarterly">EPS quarterly</button>
+                        <div class="container-fluid gy-2 mb-2 " id="seeEPSData"> <!--border border-2 border-dark-->
+                            <div class="holderEPS table-responsive pb-4 mt-3">
+                                <table class="table table-striped table-border table-light text-center">
+                                    <tbody id="results2">
+                                        <thead>
+                                            <tr class="text-primary">
+                                                <th scope='col'><small>Report #</small></th>
+                                                <th scope='col'><small>Estimated EPS</small></th>
+                                                <th scope='col'><small>Fiscal Date Ending</small></th>
+                                                <th scope='col'><small>Reported Date</small></th>
+                                                <th scope='col'><small>Reported EPS</small></th>
+                                                <th scope='col'><small>Suprise</small></th>
+                                                <th scope='col'><small>Suprise Percentage</small></th>
+                                            </tr>
+                                        </thead>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </main>
+    <!--Footer Section-->
+    <footer class="footer mt-auto py-5 bg-light">
+     
+        <div class="container-fluid ">
+            <div class="row row-cols-1 row-cols-lg-3 gy-3"> <!--Each column is 4 unites wide since there is a 12 unite maximum -->
+                <div class="col order-last text-light order-lg-first"> <!--When the screen size is less than large than we want this copy right information to be on the bottom instead of first. For large and above we want the copy right information first.-->
+                    <div class="text-dark" style="font-size:12px"><span class="text-dark text-muted" style="font-size:12px">&copy;2021</span> Matthew Snyder | matthewx.xm.snyder@gmail.com</div> <!--text-muted just changes the appearance of the text-->
+                </div>
+                <div class="col  d-flex align-items-centers justify-content-start justify-content-lg-center"> <!--d-flex allows us to control horizontal and vertical positions, aligned content to the center using align items which gives vertical alignment and then justify content-center is horizontal alignment which leaves the content in center of col-->
+                   <h3 class='text-dark'>Matthew Snyder</h3> <!--put height="24" to keeps things proportional and looking right-->
+                </div>
+                <div class="col d-flex align-items-center justify-content-start justify-content-lg-end"> <!--d-flex makes the column take up the least amount of space, doesnt try and spread anything out, align items center provides vertical alignment. justify-content-end moves our items to the far right of the col-->
+                    <div class="row">
+                        <div class="col social"><a href="https://github.com/mattsnyde" target="_blank"> <i class="text-dark fab fa-github fa-2x"></i></a></div>
+                        <div class="col social" ><a href="https://www.linkedin.com/in/matthew-snyder-00552320b/"  target="_blank"><i class="text-dark fab fa-linkedin fa-2x"></i></a></div>
+
+                </div>
+               
+            </div>
+
+         </div>
+         <div class="row row-cols-1 row-cols-lg-3 gy-3 justify-content-center">
+            <small class="text-center">Powered by: AlphaVantage & NewsAPI</small>
+        </div>
+    </footer>
+<!--Template used for Balance sheet, there are 23 columns-->
+<template id='fbTemplate'>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+  </template>
+
+  <template id ='fbTemplate2'>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+  </template>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/script.js"></script> 
+</body>
+
+</html>
+
+<!--when using target="_blank" inside of an <a></a> it will open a new tab instead of turning the tab the person is currently in into the link they just clicked.
+    for example If i am on my portfolio site and a i link to my github using <a></a> with no target-"_blank" then my portfolio site will close and will be turned into my github.
+    Versus if i included a target="_blank inside of my <a></a> and when the user clicked my github icon it would have just opened a new tab that is my github and would not close the user out of my portfolio."
+-->

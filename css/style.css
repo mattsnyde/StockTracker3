@@ -1,0 +1,15 @@
+body{
+    background-color: #ddd;
+    margin: 0;
+    padding: 0;
+}
+
+.linkToNews{
+    text-decoration: none;
+    color: black;
+}
+
+.linkToNews:hover{
+    color: black;
+    cursor: pointer;
+}
