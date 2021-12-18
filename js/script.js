@@ -8,8 +8,8 @@ const USDFORMAT = new Intl.NumberFormat('en-US', {
 });
 
 
-import API_KEY_ALPHAVANTAGE from "./apikey";
-import API_KEY_NEWSAPI from "./apikey";
+const API_KEY_ALPHAVANTAGE= 'P5ID58CJZVI9X4PY';
+const API_KEY_NEWSAPI = '5c58efeb6bbb473883930dbc518b1592'
 
 function tickerLookUp(){ //Get the ticker provided by the user inside of the search Box in the header
     return document.getElementById('searchBox').value;
